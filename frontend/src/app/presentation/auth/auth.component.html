@@ -1,0 +1,63 @@
+<div class="auth-container">
+  <div class="auth-box">
+    <div class="logo-area">
+      <img src="assets/artisanat-logo.jpg" alt="Artisanat" />
+      <h2>Plateforme Artisanat</h2>
+    </div>
+
+    @if(isLoginMode) {
+      <!-- Formulaire de connexion -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Mot de passe</mat-label>
+          <input matInput formControlName="motDePasse" type="password" required />
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">
+          Se connecter
+        </button>
+      </form>
+    } @else {
+      <!-- Formulaire d'inscription -->
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form">
+        <mat-form-field appearance="fill">
+          <mat-label>Nom</mat-label>
+          <input matInput formControlName="nom" required />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Prenom</mat-label>
+          <input matInput formControlName="prenom" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Mot de passe</mat-label>
+          <input matInput formControlName="motDePasse" type="password" required />
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">
+          S'inscrire
+        </button>
+      </form>
+    }
+
+    <!-- Boutons pour basculer entre Connexion et Inscription -->
+    <div class="switch-mode">
+      <span>
+        {{ isLoginMode ? "Pas encore de compte ?" : "Déjà un compte ?" }}
+      </span>
+      <button mat-button (click)="toggleMode()">
+        {{ isLoginMode ? "Créer un compte" : "Se connecter" }}
+      </button>
+    </div>
+  </div>
+</div>
