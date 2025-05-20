@@ -17,20 +17,16 @@ public class AuthController {
         this.authenticationService = authenticationService;
     }
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody Utilisateur utilisateur) {
-        try {
-            AuthenticationResponse response = authenticationService.register(utilisateur);
-            return ResponseEntity.ok(response); // 200 OK avec le token
-        } catch (RuntimeException e) {
-            return ResponseEntity
-                    .status(403)
-                    .body(e.getMessage()); // retourne "Email déjà utilisé !"
-        }
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody Utilisateur utilisateur) {
+        AuthenticationResponse response = authenticationService.register(utilisateur);
+        return ResponseEntity.ok(response);
     }
 
 
+
     @PostMapping("/login")
-    public AuthenticationResponse login(@RequestBody AuthenticationRequest request) {
-        return authenticationService.authenticate(request);
+    public ResponseEntity<AuthenticationResponse>  login(@RequestBody AuthenticationRequest request) {
+        AuthenticationResponse response = authenticationService.authenticate(request);
+        return ResponseEntity.ok(response);
     }
 }
